@@ -1,0 +1,114 @@
+//SASS variables
+$bg-color-primary: #e0eafc;
+$bg-color-secondary: #cfdef3;
+$bg-color-primary--dark-theme: #030d1f;
+$bg-color-secondary--dark-theme: #0c1b30;
+
+$card-bg-color: #f1f1f1;
+$text-color: black;
+
+//CSS variables
+:root {
+    color-scheme: light;
+
+    --bg-color-primary:#{$bg-color-primary};
+    --bg-color-secondary:#{$bg-color-secondary};
+    --bg-color-primary--dark-theme:#{$bg-color-primary--dark-theme};
+    --bg-color-secondary--dark-theme:#{$bg-color-secondary--dark-theme};
+
+    --text-color:#{$text-color};
+    --card-bg-color:#{$card-bg-color};
+}
+
+//Dark theme
+@media (prefers-color-scheme: dark) {
+    //SASS variables
+    $card-bg-color: #0e0e0e;
+    $text-color: white;
+
+    //CSS variables
+    :root {
+        color-scheme: dark;
+
+        --text-color:#{$text-color};
+        --card-bg-color:#{$card-bg-color};
+    }
+
+    body {
+        background-position: 100% 100%;
+    }
+}
+
+
+//Maps 
+$breakpoints: (
+    mobile: 768px,
+    tablet: 992px,
+    laptop: 993px,
+    desktop: 1150px,
+);
+
+//Mixins
+
+@mixin mobile-only {
+    @media screen and (max-width: map-get($breakpoints, mobile)) {
+        @content;
+    }
+}
+
+@mixin tablet-only {
+    @media screen and (min-width: map-get($breakpoints, mobile)) and (max-width: map-get($breakpoints, tablet)) {
+        @content;
+    }
+}
+
+@mixin laptop-only {
+    @media screen and (min-width: map-get($breakpoints, laptop)) and (max-width: map-get($breakpoints, desktop)) {
+        @content;
+    }
+}
+
+@mixin desktop-only {
+    @media screen and (min-width: map-get($breakpoints, desktop)) {
+        @content;
+    }
+}
+
+@mixin center-flex($gap: 0px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: $gap;
+}
+
+@mixin center-flex-column($gap: 0px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: $gap;
+}
+
+//Norm and typo
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background-image: linear-gradient(to right, var(--bg-color-primary), var(--bg-color-secondary), var(--bg-color-primary--dark-theme), var(--bg-color-secondary--dark-theme));
+    background-size: 350% 100%;
+    transition:
+        background-position 350ms ease-out;
+
+    font-family: 'Open sans', 'Courier New', Courier, monospace;
+}
+
+
+//SASS Styling
+.main {}
