@@ -133,5 +133,5 @@ for (radioButton of radioButtonsArray) {
 function resetCardColor(e) {
   let card = e.target.parentElement.parentElement;
   card.classList?.remove("correct");
-  card.classList.remove("incorrect");
+  card.classList?.remove("incorrect");
 }
