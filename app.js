@@ -107,7 +107,7 @@ function showResults(results) {
   }
 }
 
-const cards = document.querySelectorAll(".main__card-section");
+const cards = document.querySelectorAll(".main__card-section"); //⚠ NodeList
 const cardsArray = Array.from(cards);
 
 function addColorsToCards(results) {
@@ -123,7 +123,7 @@ function addColorsToCards(results) {
   }
 }
 
-const radioButtons = document.querySelectorAll(".main__input");
+const radioButtons = document.querySelectorAll(".main__input"); //⚠ NodeList
 const radioButtonsArray = Array.from(radioButtons);
 
 for (radioButton of radioButtonsArray) {
