@@ -6,4 +6,4 @@ You can see which ones were answered correctly and incorrectly + with a score
 
 This project took me approximately 12 hours to make
 
-Link to the GitHub Pages:
+Link to the GitHub Pages: https://lephenix47.github.io/Random-quiz_Younes-Lahouiti/
