@@ -4,8 +4,23 @@ $bg-color-secondary: #cfdef3;
 $bg-color-primary--dark-theme: #030d1f;
 $bg-color-secondary--dark-theme: #0c1b30;
 
+$wrong-answer-bg-color-primary: #ef5983;
+$wrong-answer-bg-color-secondary: #fb6651;
+$wrong-answer-color: white;
+
+$right-answer-bg-color-primary: #92f65fcc;
+$right-answer-bg-color-secondary: #a6efdc;
+$right-answer-color: black;
+
 $card-bg-color: #f1f1f1;
 $text-color: black;
+$box-shadow-color: rgba(0, 0, 0, 0.2);
+$custom-radio-bg-color: blue;
+
+$validate-btn-bg-color--hover: lightgreen;
+$box-shadow-btn-color--hover: rgba(0, 0, 0, 0.5);
+$validate-btn-bg-color--active: darken($validate-btn-bg-color--hover, 20%);
+$box-shadow-btn-color--active: darken($box-shadow-btn-color--hover, 20%);
 
 //CSS variables
 :root {
@@ -16,8 +31,25 @@ $text-color: black;
     --bg-color-primary--dark-theme:#{$bg-color-primary--dark-theme};
     --bg-color-secondary--dark-theme:#{$bg-color-secondary--dark-theme};
 
+    --wrong-answer-bg-color-primary:#{$wrong-answer-bg-color-primary};
+    --wrong-answer-bg-color-secondary:#{$wrong-answer-bg-color-secondary};
+    --wrong-answer-color: #{$wrong-answer-color};
+
+    --right-answer-bg-color-primary:#{$right-answer-bg-color-primary};
+    --right-answer-bg-color-secondary:#{$right-answer-bg-color-secondary};
+    --right-answer-color: #{$right-answer-color};
+
+
     --text-color:#{$text-color};
     --card-bg-color:#{$card-bg-color};
+    --box-shadow-color:#{$box-shadow-color};
+    --custom-radio-bg-color:#{$custom-radio-bg-color};
+
+    --validate-btn-bg-color--hover:#{$validate-btn-bg-color--hover};
+    --box-shadow-btn-color--hover:#{$box-shadow-btn-color--hover};
+
+    --validate-btn-bg-color--active:#{$validate-btn-bg-color--active};
+    --box-shadow-btn-color--active:#{$box-shadow-btn-color--active};
 }
 
 //Dark theme
@@ -25,6 +57,13 @@ $text-color: black;
     //SASS variables
     $card-bg-color: #0e0e0e;
     $text-color: white;
+    $box-shadow-color: rgba(255, 255, 255, 0.4);
+    $custom-radio-bg-color: orange;
+
+    $validate-btn-bg-color--hover: darkgreen;
+    $box-shadow-btn-color--hover: rgba(255, 255, 255, 0.6);
+    $validate-btn-bg-color--active: lighten($validate-btn-bg-color--hover, 20%);
+    $box-shadow-btn-color--active: lighten($box-shadow-btn-color--hover, 20%);
 
     //CSS variables
     :root {
@@ -32,6 +71,14 @@ $text-color: black;
 
         --text-color:#{$text-color};
         --card-bg-color:#{$card-bg-color};
+        --box-shadow-color:#{$box-shadow-color};
+        --custom-radio-bg-color:#{$custom-radio-bg-color};
+
+        --validate-btn-bg-color--hover:#{$validate-btn-bg-color--hover};
+        --box-shadow-btn-color--hover:#{$box-shadow-btn-color--hover};
+
+        --validate-btn-bg-color--active:#{$validate-btn-bg-color--active};
+        --box-shadow-btn-color--active:#{$box-shadow-btn-color--active};
     }
 
     body {
@@ -90,6 +137,16 @@ $breakpoints: (
     gap: $gap;
 }
 
+@mixin card-styling {
+    background-color: var(--card-bg-color);
+    box-shadow: 0px 5px 8px var(--box-shadow-color);
+    border-radius: 5px;
+    transition:
+        background-color 200ms ease-out,
+        box-shadow 200ms ease-out;
+
+}
+
 //Norm and typo
 *,
 ::before,
@@ -109,6 +166,193 @@ body {
     font-family: 'Open sans', 'Courier New', Courier, monospace;
 }
 
+fieldset,
+button {
+    border: none;
+}
+
+button,
+label {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 
 //SASS Styling
-.main {}
+.main {
+    min-height: inherit;
+    margin-bottom: 25px;
+
+    &__title {
+        text-align: center;
+        font-weight: bold;
+        margin: 35px 0;
+        font-family: 'Roboto';
+
+        &>span {
+            font-weight: normal;
+        }
+    }
+
+    &__form {
+        @include center-flex-column(25px);
+    }
+
+    &__card-section {
+        min-width: 640px;
+        min-height: 200px;
+
+        @include card-styling;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 25px;
+        padding: 25px;
+
+        @include mobile-only {
+            width: 75%;
+            min-height: 100px;
+            min-width: 200px;
+            height: 350px;
+            gap: 15px;
+            padding-left: 20px;
+        }
+
+    }
+
+    &__question {
+
+
+        &>span {
+            text-decoration: underline;
+        }
+    }
+
+    &__answers {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-left: 30px;
+        width: 100%;
+
+        @include mobile-only {
+            font-size: 14px;
+            margin-left: 25px;
+            padding-bottom: 10px;
+        }
+
+        &-legend {
+            margin-bottom: 25px;
+            font-family: 'Roboto';
+        }
+    }
+
+    &__input {
+        display: none;
+
+        &:checked+label::after {
+            scale: 75%;
+        }
+    }
+
+    &__label {
+        position: relative;
+        font-weight: 300;
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            translate: 0 -50%;
+            border-radius: 50%;
+            aspect-ratio: 1/1;
+            height: 15px;
+            background-color: transparent;
+            outline: 2px solid var(--text-color);
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            translate: 0 -50%;
+            border-radius: 50%;
+            scale: 0%;
+            aspect-ratio: 1/1;
+            height: 15px;
+            background-color: var(--custom-radio-bg-color);
+            transition: scale 150ms ease-out;
+        }
+    }
+
+    &__submit-btn {
+        width: 165px;
+        height: 35px;
+        border: 2px solid var(--validate-btn-bg-color--active);
+        @include card-styling;
+
+        font-weight: bold;
+        margin-block: 20px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: var(--validate-btn-bg-color--hover);
+            box-shadow: 0px 5px 8px var(--box-shadow-btn-color--hover);
+        }
+
+        &:active {
+            background-color: var(--validate-btn-bg-color--active);
+            box-shadow: 0px 5px 8px var(--box-shadow-btn-color--active);
+        }
+    }
+
+    &__results {
+        @include center-flex-column();
+
+        &-card {
+
+            @include card-styling;
+
+            padding: 15px;
+
+            @include mobile-only {
+                width: 75%;
+                text-align: center;
+            }
+        }
+
+
+        &-score {
+            @include card-styling();
+            margin-top: 15px;
+            padding: 15px;
+        }
+    }
+}
+
+//CSS classes for JS
+.correct {
+    background-image: linear-gradient(to right, var(--right-answer-bg-color-primary), var(--right-answer-bg-color-secondary));
+    color: var(--right-answer-color);
+}
+
+.incorrect {
+    background-image: linear-gradient(to right, var(--wrong-answer-bg-color-primary), var(--wrong-answer-bg-color-secondary));
+    color: var(--wrong-answer-color);
+
+    & label::before {
+        outline: 2px solid var(--wrong-answer-color);
+    }
+}
+
+.hide {
+    display: none;
+}
